@@ -16,19 +16,3 @@ b2.beers.create name:"Huvila Pale Ale", style:"Pale Ale"
 b2.beers.create name:"X Porter", style:"Porter"
 b3.beers.create name:"Hefeweizen", style:"Weizen"
 b3.beers.create name:"Helles", style:"Lager"
-
-beer1 = Beer.find_by name:"Iso 3"
-beer2 = Beer.find_by name:"Karhu"
-beer3 = Beer.find_by name:"Tuplahumala"
-beer4 = Beer.find_by name:"Helles"
-
-beer1.ratings.create score:10
-beer1.ratings.create score:22
-beer1.ratings.create score:20
-beer2.ratings.create score:12
-beer2.ratings.create score:14
-beer2.ratings.create score:15
-beer3.ratings.create score:16
-beer3.ratings.create score:12
-beer3.ratings.create score:10
-beer4.ratings.create score:12
