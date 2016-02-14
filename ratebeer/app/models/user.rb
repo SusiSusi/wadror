@@ -13,4 +13,15 @@ class User < ActiveRecord::Base
   validates :password, format: { :with => /\A(?=.*[A-Z])(?=.*[0-9]).{4,}\z/,
                                  message: "must be at least 4 characters including one uppercase letter and one number" }
 
+
+  def favorite_beer
+    return nil if ratings.empty?
+    ratings.order(score: :desc).limit(1).first.beer
+  end
+
+#  def favorite_style
+ #   return nil if ratings.empty?
+  #  ratings.order(score: :desc).limit(1).first.beer.style
+  #end
+
 end
