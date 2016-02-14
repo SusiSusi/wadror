@@ -37,8 +37,9 @@
   </tbody>
 </table>
 
+<br>
+
 <% if @user == current_user %>
     <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Destroy', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Destroy user', @user, method: :delete, data: { confirm: 'Are you sure?' } %>
 <% end %>
-<%= link_to 'Back', users_path %>

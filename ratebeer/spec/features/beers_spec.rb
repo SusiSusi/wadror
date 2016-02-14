@@ -5,14 +5,14 @@ include Helpers
 describe "Beer" do
 
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
+  let!(:user) { FactoryGirl.create :user }
 
-  #before :each do
-  #  sign_in(username:"Pekka", password:"Foobar1")
-  #end
+  before :each do
+    sign_in(username:"Pekka", password:"Foobar1")
+    visit new_beer_path
+  end
 
   it "with valid name, is added to the database" do
-    visit new_beer_path
-
     fill_in('beer[name]', with:'Olppi')
     select('Lager', from:'beer[style]')
     select('Koff', from:'beer[brewery_id]')
@@ -26,8 +26,6 @@ describe "Beer" do
   end
 
   it "with invalid name, is not added to the database" do
-    visit new_beer_path
-
     fill_in('beer[name]', with:'')
     select('Lager', from:'beer[style]')
     select('Koff', from:'beer[brewery_id]')
@@ -35,7 +33,6 @@ describe "Beer" do
 
     expect(Beer.count).to eq(0)
     expect(page).to have_content "Name can't be blank"
-
     #save_and_open_page
   end
 end

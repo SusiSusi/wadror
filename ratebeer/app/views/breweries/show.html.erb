@@ -9,7 +9,7 @@
 
 <p>
   <% @brewery.beers.each do |beer| %>
-      <%= link_to beer.name, beer %>
+      <%= link_to beer.name, beer %> |
   <% end %>
 </p>
 
@@ -18,8 +18,11 @@
 <% else %>
     Has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= @brewery.average_rating %>
 <% end %>
+
+<br>
 <br>
 <br>
 
-<%= link_to 'Edit', edit_brewery_path(@brewery) %>
+<%= link_to 'Edit', edit_brewery_path(@brewery) if current_user %> |
+<%= link_to 'Destroy brewery', @brewery, method: :delete, data: { confirm: 'Are you sure?' } if current_user %>
 
