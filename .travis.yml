@@ -1,6 +1,3 @@
-before_install:
-- cd ratebeer
-
 language: ruby
 
 rvm:
