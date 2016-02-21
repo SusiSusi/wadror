@@ -1,17 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe Beer, type: :model do
-  #pending "add some examples to (or delete) #{__FILE__}"
+
+  let(:style) { Style.create name:"Lager", description:"titi" }
+
   it "has the name and style set correctly" do
-    beer = Beer.new name:"Olut", style:"Lager"
+    beer = Beer.new name:"Olut", style_id:style.id
 
     expect(beer).to be_valid
     expect(beer.name).to eq("Olut")
-    expect(beer.style).to eq("Lager")
+    expect(beer.style.name).to eq("Lager")
   end
 
   it "is not saved without a name" do
-    beer = Beer.new style:"Lager"
+    beer = Beer.new
 
     expect(beer).not_to be_valid
     expect(Beer.count).to eq(0)

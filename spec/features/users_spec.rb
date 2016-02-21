@@ -4,6 +4,9 @@ include Helpers
 
 describe "User" do
   let!(:user) { FactoryGirl.create :user }
+  let!(:style) { FactoryGirl.create :style }
+  let!(:style2) { FactoryGirl.create :style, name:"IPA" }
+  let!(:style3) { FactoryGirl.create :style, name:"Stout" }
 
   describe "who has signed up" do
 
@@ -37,9 +40,9 @@ describe "User" do
     before :each do
       @brewery = FactoryGirl.create :brewery, name:"Sierra Nevada"
       other_brewery = FactoryGirl.create :brewery
-      create_beers_with_ratings(user, "lager", other_brewery, 10, 20, 15)
-      create_beers_with_ratings(user, "IPA", @brewery, 25, 20)
-      create_beers_with_ratings(user, "stout", other_brewery, 20, 23, 22)
+      create_beers_with_ratings(user, style, other_brewery, 10, 20, 15)
+      create_beers_with_ratings(user, style2, @brewery, 25, 20)
+      create_beers_with_ratings(user, style3, other_brewery, 20, 23, 22)
     end
 
     it "the favorite style is shown at user's page" do

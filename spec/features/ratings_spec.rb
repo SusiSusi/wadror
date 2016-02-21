@@ -5,6 +5,8 @@ include Helpers
 describe "Rating" do
 
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
+  let!(:style) { FactoryGirl.create :style }
+  let!(:style2) { FactoryGirl.create :style, name:"Stout", description:"tilili" }
   let!(:beer1) { FactoryGirl.create :beer, name:"iso 3", brewery:brewery }
   let!(:beer2) { FactoryGirl.create :beer, name:"Karhu", brewery:brewery }
   let!(:user) { FactoryGirl.create :user }
@@ -30,7 +32,7 @@ describe "Rating" do
 
   it "page lists ratings and total number of ratings" do
     brewery = FactoryGirl.create(:brewery)
-    @beers = create_beers_with_ratings(user, "lager", brewery, 10, 20, 15, 7, 9)
+    @beers = create_beers_with_ratings(user, style, brewery, 10, 20, 15, 7, 9)
 
     visit ratings_path
 
@@ -46,8 +48,8 @@ describe "Rating" do
 
     before :each do
       brewery = FactoryGirl.create(:brewery)
-      @rated_beers = create_beers_with_ratings(user, "lager", brewery, 10, 20, 15, 7, 9)
-      create_beers_with_ratings(user2, "Stout", brewery, 22, 13, 9)
+      @rated_beers = create_beers_with_ratings(user, style, brewery, 10, 20, 15, 7, 9)
+      create_beers_with_ratings(user2, style2, brewery, 22, 13, 9)
       visit user_path(user)
     end
 

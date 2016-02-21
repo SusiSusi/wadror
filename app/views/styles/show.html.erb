@@ -1,14 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @style.name %>
-</p>
+<h2><%= @style.name %></h2>
+
 
 <p>
-  <strong>Description:</strong>
   <%= @style.description %>
 </p>
 
-<%= link_to 'Edit', edit_style_path(@style) %> |
-<%= link_to 'Back', styles_path %>
+<h3>Beers:</h3>
+<% if @style.beers.empty? %>
+    Style has no beers!
+<% else %>
+    <table>
+      <tbody>
+      <ul>
+        <% @style.beers.each do |beer| %>
+            <li>
+              <%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, beer.brewery %>
+            </li>
+        <% end %>
+      </ul>
+      </tbody>
+    </table>
+<% end %>
+
+<br>
+<br>
+
+<% if current_user %>
+    <%= link_to 'Edit', edit_style_path(@style) %> |
+    <%= link_to 'Destroy style', @style, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+

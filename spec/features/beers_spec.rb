@@ -6,6 +6,7 @@ describe "Beer" do
 
   let!(:brewery) { FactoryGirl.create :brewery, name:"Koff" }
   let!(:user) { FactoryGirl.create :user }
+  let!(:style) { FactoryGirl.create :style }
 
   before :each do
     sign_in(username:"Pekka", password:"Foobar1")
@@ -14,7 +15,7 @@ describe "Beer" do
 
   it "with valid name, is added to the database" do
     fill_in('beer[name]', with:'Olppi')
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
 
     expect{
@@ -27,7 +28,7 @@ describe "Beer" do
 
   it "with invalid name, is not added to the database" do
     fill_in('beer[name]', with:'')
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('Koff', from:'beer[brewery_id]')
     click_button('Create Beer')
 
