@@ -29,7 +29,9 @@ describe "Rating" do
   end
 
   it "page lists ratings and total number of ratings" do
-    @beers = create_beers_with_ratings(user, 10, 20, 15, 7, 9)
+    brewery = FactoryGirl.create(:brewery)
+    @beers = create_beers_with_ratings(user, "lager", brewery, 10, 20, 15, 7, 9)
+
     visit ratings_path
 
     expect(page).to have_content "Number of ratings: 5"
@@ -43,13 +45,14 @@ describe "Rating" do
   describe "by user" do
 
     before :each do
-      @rated_beers = create_beers_with_ratings(user, 10, 20, 10, 3, 7)
-      create_beers_with_ratings(user2, 22, 13, 9)
+      brewery = FactoryGirl.create(:brewery)
+      @rated_beers = create_beers_with_ratings(user, "lager", brewery, 10, 20, 15, 7, 9)
+      create_beers_with_ratings(user2, "Stout", brewery, 22, 13, 9)
       visit user_path(user)
     end
 
     it "displays correctly in user's page" do
-      expect(page).to have_content "has made 5 ratings, average 10.0"
+      expect(page).to have_content "Has made 5 ratings, average 12.2"
       expect(Rating.count).to eq(8)
       expect(user.ratings.count).to eq(5)
 
@@ -62,7 +65,7 @@ describe "Rating" do
     it "is deleted correctly" do
       page.find('li', :text => @rated_beers[1]).click_link('Delete')
 
-      expect(page).to have_content "has made 4 ratings, average 7.5"
+      expect(page).to have_content "Has made 4 ratings, average 10.25"
       expect(Rating.count).to eq(7)
       expect(user.ratings.count).to eq(4)
 

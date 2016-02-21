@@ -8,17 +8,25 @@
 <% if @user.ratings.empty? %>
     <p>has not rated any beer </p>
 <% else %>
-  <p>has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %></p>
+  <p>Has made <%= pluralize(@user.ratings.count, 'rating') %>, average <%= @user.average_rating %></p>
 <% end %>
 
-<p>
-  <% if @user.beer_clubs %>
-      Member of
+<% if @user.ratings.any? %>
+    <p>Favorite style: <%= @user.favorite_style %></p>
+
+    <p>Favorite brewery: <%= @user.favorite_brewery.name %></p>
+<% end %>
+
+  <% if @user.beer_clubs.any? %>
+    <p> Member of
       <% @user.beer_clubs.each do |beerClub| %>
           <%= link_to beerClub.name, beerClub %>
       <% end %>
+    </p>
+    <% else %>
+    <p>No club memperships</p>
   <% end %>
-</p>
+
 
 
 <h3>Ratings</h3>
