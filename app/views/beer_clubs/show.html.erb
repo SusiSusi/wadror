@@ -1,19 +1,15 @@
-<p id="notice"><%= notice %></p>
-
 <h2><%= @beer_club.name %></h2>
 
 <p> Founded <%= @beer_club.founded %>, <%= @beer_club.city %></p>
 
 <h3>Members</h3>
-<table>
+<table class="table table-hover table-condensed">
   <tbody>
-
-  <ul>
-    <% @beer_club.users.each do |user| %>
-        <li> <%= link_to user.username, user %> </li>
-    <% end %>
-  </ul>
-
+  <% @beer_club.users.each do |user| %>
+      <tr>
+        <td> <%= link_to user.username, user %> </td>
+      </tr>
+  <% end %>
   </tbody>
 </table>
 
@@ -24,21 +20,19 @@
     <% if @new %>
         <%= form_for(@membership) do |f| %>
             <%= f.hidden_field :beer_club_id %>
-            <%= f.submit value:"Join the club" %>
+            <%= f.submit value:"Join the club", class:'btn btn-info' %>
         <% end %>
     <% else %>
         <%= form_for(@membership, method: "delete") do |f| %>
             <%= f.hidden_field :beer_club_id %>
-            <%= f.submit value: "End the membership" %>
+            <%= f.submit value: "End the membership", class:'btn btn-danger' %>
         <% end %>
     <% end %>
 
-
     <br>
     <br>
 
-    <%= link_to 'Edit', edit_beer_club_path(@beer_club) %> |
-    <%= link_to 'Destroy the club', @beer_club, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= edit_and_destroy_buttons(@beer_club) %>
 
 <% end %>
 

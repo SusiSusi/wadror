@@ -1,7 +1,10 @@
-<p id="notice"><%= notice %></p>
+<h2><%= @brewery.name %>
+  <% if not @brewery.active  %>
+      <span class="label label-info">retired</span>
+  <% end %>
+</h2>
 
-<h2><%= @brewery.name %></h2>
-<i>Established at <%= @brewery.year %></i>
+<i>Established year: <%= @brewery.year %></i>
 
 <p>
   Number of beers <%= @brewery.beers.count %>
@@ -16,14 +19,12 @@
 <% if @brewery.ratings.empty? %>
     Brewery's beers has not yet been rated!
 <% else %>
-    Has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= @brewery.average_rating %>
+    Has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= round(@brewery.average_rating) %>
 <% end %>
 
 <br>
 <br>
 <br>
-
-<%= link_to 'Edit', edit_brewery_path(@brewery) if current_user %>
 <br>
-<%= link_to 'Destroy brewery', @brewery, method: :delete, data: { confirm: 'Are you sure?' } if current_user %>
 
+<%= edit_and_destroy_buttons(@brewery) %>

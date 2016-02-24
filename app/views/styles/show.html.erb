@@ -3,23 +3,31 @@
 <h2><%= @style.name %></h2>
 
 
-<p>
+<quote>
   <%= @style.description %>
-</p>
+</quote>
 
 <h3>Beers:</h3>
 <% if @style.beers.empty? %>
     Style has no beers!
 <% else %>
-    <table>
+    <table class="table table-hover">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Brewery</th>
+        <th colspan="3"></th>
+      </tr>
+      </thead>
+
+
       <tbody>
-      <ul>
-        <% @style.beers.each do |beer| %>
-            <li>
-              <%= link_to beer.name, beer %> by <%= link_to beer.brewery.name, beer.brewery %>
-            </li>
-        <% end %>
-      </ul>
+      <% @style.beers.each do |beer| %>
+          <tr>
+            <td><%= link_to beer.name, beer %></td>
+            <td><%= link_to beer.brewery.name, beer.brewery %></td>
+          </tr>
+      <% end %>
       </tbody>
     </table>
 <% end %>
@@ -27,8 +35,5 @@
 <br>
 <br>
 
-<% if current_user %>
-    <%= link_to 'Edit', edit_style_path(@style) %> |
-    <%= link_to 'Destroy style', @style, method: :delete, data: { confirm: 'Are you sure?' } %>
-<% end %>
+<%= edit_and_destroy_buttons(@style) %>
 

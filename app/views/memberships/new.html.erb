@@ -13,7 +13,12 @@
         </div>
     <% end %>
 
-    Beer club: <%= m.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
-    <%= m.submit %>
+    <div class="form-group">
+      <%= m.label :Beer_club %><br>
+       <%= m.select :beer_club_id, options_from_collection_for_select(@beer_clubs, :id, :to_s) %>
+      <br>
+      <br>
+      <%= m.submit class:"btn btn-primary" %>
+    </div>
 <% end %>
 

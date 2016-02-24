@@ -14,6 +14,11 @@ class User < ActiveRecord::Base
                                  message: "must be at least 4 characters including one uppercase letter and one number" }
 
 
+  def self.top(n)
+    sorted_by_rating_in_desc_order = User.all.sort_by{ |b| -(b.ratings.count||0 )}
+    return sorted_by_rating_in_desc_order.take(n)
+  end
+
   def favorite_beer
     return nil if ratings.empty?
     ratings.order(score: :desc).limit(1).first.beer

@@ -1,14 +1,16 @@
 <h1>Beer places search</h1>
 
-<p id="notice"><%= notice %></p>
-
 <%= form_tag places_path do %>
-    city <%= text_field_tag :city, params[:city] %>
-    <%= submit_tag "Search" %>
+    <div class="form-group">
+      <label>City</label><br>
+      <%= text_field_tag :city, params[:city], class:'form-control' %>
+      <br>
+      <%= submit_tag "Search", class:"btn btn-default" %>
+    </div>
 <% end %>
 
 <% if @places %>
-    <table>
+    <table class="table table-hover">
       <thead>
       <% Place.rendered_fields.each do |field| %>
           <td><%=field %></td>
@@ -18,11 +20,11 @@
           <tr>
             <% Place.rendered_fields.each do |field| %>
                 <td>
-                <% if field == :name %>
-                    <%= link_to place.send(field), place_path(place.send(:id)) %>
-                <% else %>
-                    <%= place.send(field) %>
-                <% end %>
+                  <% if field == :name %>
+                      <%= link_to place.send(field), place_path(place.send(:id)) %>
+                  <% else %>
+                      <%= place.send(field) %>
+                  <% end %>
                 </td>
             <% end %>
           </tr>
