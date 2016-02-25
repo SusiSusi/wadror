@@ -11,7 +11,7 @@ class Brewery < ActiveRecord::Base
   scope :retired, -> { where active:[nil,false] }
 
   def to_s
-    return "#{self.name}, #{brewery.name}"
+    return "#{self.name}"
   end
 
   def self.top(n)
