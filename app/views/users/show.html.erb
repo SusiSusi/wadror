@@ -1,9 +1,10 @@
-<br>
-<br>
-<p>
-  <strong>Username:</strong>
-  <%= @user.username %>
-</p>
+
+<h2><%= @user.username %>
+  <% if @user.chilled && current_user && current_user.admin %>
+      <span class="label label-info">Account frozen</span>
+  <% end %>
+</h2>
+
 
 <% if @user.ratings.empty? %>
     <p>has not rated any beer </p>
@@ -47,7 +48,7 @@
         <td><%= rating.beer.name %></td>
         <td><%= rating.score %></td>
         <% if @user == current_user %>
-            <td>  <%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Delete', rating, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
       </tr>
   <% end %>
@@ -56,4 +57,20 @@
 
 <br>
 
-<%= edit_and_destroy_buttons(@user) %>
+<% if current_user && current_user.admin %>
+    <% if @user.chilled %>
+        <%= link_to "Reactive account", toggle_activity_user_path(@user.id),
+                    method: :post, class: 'btn btn-danger btn-sm' %>
+    <% else %>
+        <%= link_to "Froze account", toggle_activity_user_path(@user.id),
+                    method: :post, class: 'btn btn-danger btn-sm' %>
+    <% end %>
+<% end %>
+
+<br>
+<br>
+
+<% if @user == current_user %>
+    <%= link_to 'Edit', edit_user_path(@user), class:'btn btn-default btn-sm' %>
+    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' }, class:'btn btn-danger btn-sm' %>
+<% end %>

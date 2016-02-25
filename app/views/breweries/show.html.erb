@@ -4,6 +4,8 @@
   <% end %>
 </h2>
 
+
+
 <i>Established year: <%= @brewery.year %></i>
 
 <p>
@@ -26,5 +28,6 @@
 <br>
 <br>
 <br>
-
+<%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id),
+            method: :post, class: 'btn btn-default btn-sm' %>
 <%= edit_and_destroy_buttons(@brewery) %>
