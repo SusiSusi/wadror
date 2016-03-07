@@ -18,7 +18,6 @@ class BreweriesController < ApplicationController
 
     @breweries = Brewery.all
 
-
     case @order
       when 'name' then
         @active_breweries = @active_breweries.sort_by { |b| b.name }
