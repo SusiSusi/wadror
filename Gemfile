@@ -27,7 +27,16 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'jquery-turbolinks'
+
+gem 'rack-mini-profiler'
+
 gem 'bootstrap-sass'
+
+gem 'omniauth'
+
+gem 'omniauth-github'
+
 group :development do
   gem 'rails_layout'
 end
@@ -65,6 +74,8 @@ group :test do
   gem 'launchy'
   gem 'simplecov', require: false
   gem 'webmock'
+  gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :production do

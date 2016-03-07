@@ -20,4 +20,14 @@ class SessionsController < ApplicationController
     redirect_to :root
   end
 
+  def create_oauth
+    user = User.find_by username: env["omniauth.auth"].info.nickname
+    user.github = true
+    if user && user.chilled
+      redirect_to :back, notice: "Your account is frozen. Please contact admin"
+    elsif user
+    session[:user_id] = user.id
+    redirect_to user_path(user), notice: "Welcome back!"
+    end
+  end
 end

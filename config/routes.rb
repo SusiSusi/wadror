@@ -20,6 +20,11 @@ Rails.application.routes.draw do
   get 'signin', to: 'sessions#new'
   delete 'signout', to: 'sessions#destroy'
   post 'places', to:'places#search'
+  get 'beerlist', to: 'beers#list'
+  get 'ngbeerlist', to:'beers#nglist'
+  get 'brewerylist', to:'breweries#list'
+  get 'ngbrewerylist', to:'breweries#nglist'
+  get 'auth/:provider/callback', to: 'sessions#create_oauth'
 
   #get 'places', to: 'places#index'
   #post 'places', to: 'places#search'

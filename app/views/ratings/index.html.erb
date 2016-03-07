@@ -1,69 +1,73 @@
 
-<h2>Rating statics</h2>
+<% cache 'ratinglist-#{@order}', expires_in:10.minutes do %>
 
-<div class="row">
-  <div class="col-xs-4 col-sm-4">
-    <h3>Best beers</h3>
-    <%= render 'list', ratings: @top_beers%>
-  </div>
-  <div class="col-xs-4 col-sm-4">
-    <h3>Best breweries</h3>
-    <%= render 'list', ratings: @top_breweries %>
-  </div>
-  <div class="col-xs-4 col-sm-4">
-    <h3>Best styles</h3>
-    <%= render 'list', ratings: @top_styles %>
-  </div>
-</div>
+    <h2>Rating statics</h2>
 
-<br>
+    <div class="row">
+      <div class="col-xs-4 col-sm-4">
+        <h3>Best beers</h3>
+        <%= render 'list', ratings: @top_beers%>
+      </div>
+      <div class="col-xs-4 col-sm-4">
+        <h3>Best breweries</h3>
+        <%= render 'list', ratings: @top_breweries %>
+      </div>
+      <div class="col-xs-4 col-sm-4">
+        <h3>Best styles</h3>
+        <%= render 'list', ratings: @top_styles %>
+      </div>
+    </div>
 
-<table class="table table-hover table-condensed">
-<h3>Most active users</h3>
-  <thead>
-  <tr>
-    <th></th>
-    <th>Favorite beer</th>
-    <th>Prefered style</th>
-    <th>Favorite brewery</th>
-    <th>Ratings</th>
-  </tr>
-  </thead>
+    <br>
 
-  <tbody>
-  <% @top_users.each do |user| %>
+    <table class="table table-hover table-condensed">
+      <h3>Most active users</h3>
+      <thead>
       <tr>
-        <td><%= link_to user.username, user %></td>
-        <td><%= user.favorite_beer %></td>
-        <td><%= user.favorite_style %></td>
-        <td><%= user.favorite_brewery %></td>
-        <td><%= user.ratings.count %></td>
+        <th></th>
+        <th>Favorite beer</th>
+        <th>Prefered style</th>
+        <th>Favorite brewery</th>
+        <th>Ratings</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
 
-<br>
+      <tbody>
+      <% @top_users.each do |user| %>
+          <tr>
+            <td><%= link_to user.username, user %></td>
+            <td><%= user.favorite_beer %></td>
+            <td><%= user.favorite_style %></td>
+            <td><%= user.favorite_brewery %></td>
+            <td><%= user.ratings.count %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<table class="table table-hover table-condensed">
-  <h3>Recent ratings</h3>
-  <thead>
-  <tr>
-    <th>Beer</th>
-    <th>Score</th>
-    <th>User</th>
-  </tr>
-  </thead>
+    <br>
 
-  <tbody>
-  <% @recent_ratings.each do |rating| %>
+    <table class="table table-hover table-condensed">
+      <h3>Recent ratings</h3>
+      <thead>
       <tr>
-        <td><%= rating.beer %></td>
-        <td><%= rating.score %></td>
-        <td><%= link_to rating.user.username, rating.user %></td>
+        <th>Beer</th>
+        <th>Score</th>
+        <th>User</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+
+      <tbody>
+      <% @recent_ratings.each do |rating| %>
+          <tr>
+            <td><%= rating.beer %></td>
+            <td><%= rating.score %></td>
+            <td><%= link_to rating.user.username, rating.user %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+<% end %>
 
 <p> Number of ratings: <%= @ratings.count %> </p>

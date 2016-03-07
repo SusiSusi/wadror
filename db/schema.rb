@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160225151616) do
+ActiveRecord::Schema.define(version: 20160307112548) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -66,6 +66,9 @@ ActiveRecord::Schema.define(version: 20160225151616) do
     t.string   "password_digest"
     t.boolean  "admin"
     t.boolean  "chilled"
+    t.boolean  "github"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end
